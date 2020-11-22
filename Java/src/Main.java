@@ -1,16 +1,23 @@
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 public class Main {
     public static void main(String[] args){
         System.out.println("Hello World!");
-        //ryder made a change here :)
-        /**
-         * This does nothing useful
-         * Should be a for loop
-         * @return shame
-         */
-        int i = 5;
-        while (i < 100){
-            System.out.println(i);
-            i++;
+
+
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JPG & GIF Images", "jpg", "gif");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(chooser.getParent());
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("You chose to open this file: " +
+                    chooser.getSelectedFile().getName());
         }
+
+
+
+
     }
 }
