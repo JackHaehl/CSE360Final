@@ -1,5 +1,5 @@
 /**
- * @author Ryder Roth
+ * @author Ryder Roth, Jack Haehl
  * @version 1
  * @since 11/22/2020
  * student class, which holds the students ID, first name,
