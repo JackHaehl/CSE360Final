@@ -6,8 +6,21 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-public class AttendanceTest {
-
+/**
+ * @author Ryder Roth, Jack Haehl
+ * @version 1
+ * @since 11/23/2020
+ * Junit tests that verify
+ * the functionality of the
+ * Attendance Class
+ */
+public class AttendanceTest
+{
+    /**
+     * tests input of a file with no repeating
+     * ASURites
+     * @throws FileNotFoundException
+     */
     @Test
     public void inputTest() throws FileNotFoundException
     {
@@ -27,6 +40,11 @@ public class AttendanceTest {
         assertEquals(48, time5);
     }
 
+    /**
+     * tests input of a file with repeating
+     * ASURites
+     * @throws FileNotFoundException
+     */
     @Test
     public void duplicateIDInputTest() throws FileNotFoundException
     {
@@ -46,6 +64,12 @@ public class AttendanceTest {
         assertEquals(48*2, time5);
     }
 
+    /**
+     * tests the mapping to a studentList
+     * function, given that all the students
+     * match to all of the students within dates.
+     * @throws FileNotFoundException
+     */
     @Test
     public void mapToStudentListNoExtraStudents() throws FileNotFoundException
     {
@@ -81,6 +105,14 @@ public class AttendanceTest {
         assertEquals(48*2, time5);
     }
 
+    /**
+     * tests the return if there is extra students
+     * in the attendance file that are not in the
+     * student list, specifically is checking
+     * if the csv formatted String array return
+     * is correct
+     * @throws FileNotFoundException
+     */
     @Test
     public void mapToStudentListExtraStudents() throws FileNotFoundException
     {

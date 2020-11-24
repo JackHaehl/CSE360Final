@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * @author Ryder Roth, Jack Haehl
+ * @version 1
+ * @since 11/23/2020
  * This is the attendance class,
  * it stores a date, ASURite, and
  * the amount of minutes each ASURite
