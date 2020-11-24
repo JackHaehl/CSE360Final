@@ -4,16 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
-public class DatesTest {
+public class AttendanceTest {
 
     @Test
     public void inputTest() throws FileNotFoundException
     {
         File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest1.csv");
-        Dates inputTest = new Dates(myFile, "11/23/2020");
+        Attendance inputTest = new Attendance(myFile, "11/23/2020");
 
         int time1 = inputTest.getTimeAttended(0);
         int time2 = inputTest.getTimeAttended(1);
@@ -32,7 +31,7 @@ public class DatesTest {
     public void duplicateIDInputTest() throws FileNotFoundException
     {
         File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest2.csv");
-        Dates inputTest = new Dates(myFile, "11/23/2020");
+        Attendance inputTest = new Attendance(myFile, "11/23/2020");
 
         int time1 = inputTest.getTimeAttended(0);
         int time2 = inputTest.getTimeAttended(1);
@@ -51,7 +50,7 @@ public class DatesTest {
     public void mapToStudentListNoExtraStudents() throws FileNotFoundException
     {
         File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest2.csv");
-        Dates inputTest = new Dates(myFile, "11/23/2020");
+        Attendance inputTest = new Attendance(myFile, "11/23/2020");
         Student newStudent1 = new Student(3, "B", "B", "E", "G", "bobby");
         Student newStudent2 = new Student(2, "J", "H", "CS", "U", "jhaehl");
         Student newStudent3 = new Student(5, "L", "P", "Y", "N", "lastperson");
@@ -86,7 +85,7 @@ public class DatesTest {
     public void mapToStudentListExtraStudents() throws FileNotFoundException
     {
         File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest2.csv");
-        Dates inputTest = new Dates(myFile, "11/23/2020");
+        Attendance inputTest = new Attendance(myFile, "11/23/2020");
         Student newStudent1 = new Student(3, "B", "B", "E", "G", "bobby");
         Student newStudent2 = new Student(2, "J", "H", "CS", "U", "jhaehl");
         Student newStudent3 = new Student(5, "L", "P", "Y", "N", "lastperson");
