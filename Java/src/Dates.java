@@ -28,7 +28,7 @@ public class Dates {
             lineIn = fileIn.nextLine();
 
             delimiterIndex = lineIn.indexOf(delimiter);
-            ASURite = lineIn.substring( 0, delimiterIndex-1 );
+            ASURite = lineIn.substring( 0, delimiterIndex );
             time = Integer.valueOf( lineIn.substring( delimiterIndex+1, lineIn.length() ) );
 
             timeList.add(time);
@@ -110,9 +110,21 @@ public class Dates {
         }
     }
 
+    private String[] arrayListToStringArray(ArrayList<String> stringArrayList)
+    {
+        String arrayToReturn[] = new String[stringArrayList.size()];
+
+        for (int i = 0; i < stringArrayList.size(); i++)
+        {
+            arrayToReturn[i] = stringArrayList.get(i);
+        }
+
+        return arrayToReturn;
+    }
+
     private int[] mapToTimeList(ArrayList<Student> sortedStudentList)
     {
-        int mappedList[] = new int[sortedStudentList.size()];
+        int mappedList[] = new int[ASURiteList.size()];
         int previousStudentMatchIndex = 0;
         String studentIndexASURite, ASURiteIndexASURite;
         int mappedListIndex = 0;
@@ -158,15 +170,21 @@ public class Dates {
         {
             if (mapToTimeList[i] == -1)
             {
-                extraStudent = ASURiteList.get(i) + "," + timeList.get(i);
+                extraStudent = ASURiteList.get(i - indexShift) + "," + timeList.get(i - indexShift);
                 extraStudents.add(extraStudent);
                 ASURiteList.remove(i - indexShift);
                 timeList.remove(i - indexShift);
                 indexShift++;
             }
         }
+        if ( extraStudents.size() == 0)
+        {
+            return null;
+        }
+        else {
+            return arrayListToStringArray(extraStudents);
+        }
 
-        return (String[]) extraStudents.toArray();
     }
 
     int getTimeAttended(int index)
