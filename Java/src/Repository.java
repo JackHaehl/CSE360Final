@@ -150,6 +150,14 @@ public class Repository {
         attendances.add(new Attendance(attendanceFile,date.toString()));
     }
 
+    public ArrayList<Student> getStudents(){
+        return students;
+    }
+
+    public ArrayList<Attendance> getAttendances(){
+        return attendances;
+    }
+
 
 
 }
