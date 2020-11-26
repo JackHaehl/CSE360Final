@@ -24,7 +24,7 @@ public class AttendanceTest
     @Test
     public void inputTest() throws FileNotFoundException
     {
-        File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest1.csv");
+        File myFile = new File(".\\Tests\\dateTest1.csv");
         Attendance inputTest = new Attendance(myFile, "11/23/2020");
 
         int time1 = inputTest.getTimeAttended(0);
@@ -48,7 +48,7 @@ public class AttendanceTest
     @Test
     public void duplicateIDInputTest() throws FileNotFoundException
     {
-        File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest2.csv");
+        File myFile = new File(".\\Tests\\dateTest2.csv");
         Attendance inputTest = new Attendance(myFile, "11/23/2020");
 
         int time1 = inputTest.getTimeAttended(0);
@@ -73,7 +73,7 @@ public class AttendanceTest
     @Test
     public void mapToStudentListNoExtraStudents() throws FileNotFoundException
     {
-        File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest2.csv");
+        File myFile = new File(".\\Tests\\dateTest2.csv");
         Attendance inputTest = new Attendance(myFile, "11/23/2020");
         Student newStudent1 = new Student(3, "B", "B", "E", "G", "bobby");
         Student newStudent2 = new Student(2, "J", "H", "CS", "U", "jhaehl");
@@ -116,7 +116,7 @@ public class AttendanceTest
     @Test
     public void mapToStudentListExtraStudents() throws FileNotFoundException
     {
-        File myFile = new File("G:\\C-Code\\CSE360\\Final\\Java\\Tests\\dateTest2.csv");
+        File myFile = new File(".\\Tests\\dateTest2.csv");
         Attendance inputTest = new Attendance(myFile, "11/23/2020");
         Student newStudent1 = new Student(3, "B", "B", "E", "G", "bobby");
         Student newStudent2 = new Student(2, "J", "H", "CS", "U", "jhaehl");
