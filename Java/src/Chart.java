@@ -1,8 +1,14 @@
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Chart
-{
+public class Chart{
     ArrayList<DataPointContainer> dataContainer;
 
     public Chart(Repository repository)
@@ -19,7 +25,101 @@ public class Chart
 
     public void createAndDisplayChart()
     {
+        XYSeriesCollection dataset = makeDataSet();
 
+        JFreeChart attendancePlot = ChartFactory.createScatterPlot("Attendance Frequency",
+                "Percentage of Time Attended", "Number of Students", dataset);
+
+        ChartPanel chartPanel = new ChartPanel(attendancePlot);
+        chartPanel.setVisible(true);
+
+        JFrame chartFrame = new JFrame("Attendance Plot");
+        chartFrame.setVisible(true);
+        chartFrame.setSize(800, 600);
+        chartFrame.setContentPane(chartPanel);
+    }
+
+    private XYSeriesCollection makeDataSet()
+    {
+        XYSeriesCollection dataSet = new XYSeriesCollection();
+
+        for (DataPointContainer dataPoints: dataContainer)
+        {
+            XYSeries xySeriesToAdd = createXYSeries(dataPoints);
+            dataSet.addSeries(xySeriesToAdd);
+        }
+
+        return dataSet;
+    }
+
+    private XYSeries createXYSeries(DataPointContainer dataContainer)
+    {
+        Date seriesDate = dataContainer.getDate();
+        String dateAsString = dateToString(seriesDate);
+        XYSeries xySeriesToReturn = new XYSeries(dateAsString);
+        int xPoint, yPoint;
+
+        for (int i = 0; i < dataContainer.NUM_OF_POINTS; i++)
+        {
+            xPoint = dataContainer.getXData().get(i);
+            yPoint = dataContainer.getYData().get(i);
+            xySeriesToReturn.add(xPoint, yPoint);
+        }
+
+        return xySeriesToReturn;
+    }
+
+    private String dateToString(Date date)
+    {
+        String dateAsString = "";
+        int month = date.getMonth();
+        int day = date.getDate();
+        int year = date.getYear() + 1900;
+
+        switch (month)
+        {
+            case 0:
+                dateAsString += "Jan ";
+                break;
+            case 1:
+                dateAsString += "Feb ";
+                break;
+            case 2:
+                dateAsString += "Mar ";
+                break;
+            case 3:
+                dateAsString += "Apr ";
+                break;
+            case 4:
+                dateAsString += "May ";
+                break;
+            case 5:
+                dateAsString += "Jun ";
+                break;
+            case 6:
+                dateAsString += "Jul ";
+                break;
+            case 7:
+                dateAsString += "Aug ";
+                break;
+            case 8:
+                dateAsString += "Sep ";
+                break;
+            case 9:
+                dateAsString += "Oct ";
+                break;
+            case 10:
+                dateAsString += "Nov ";
+                break;
+            case 11:
+                dateAsString += "Dec ";
+                break;
+            default:
+                break;
+        }
+
+        dateAsString += day + ", " + year;
+        return dateAsString;
     }
 
     class DataPointContainer
@@ -45,7 +145,7 @@ public class Chart
 
             for (int i = 0; i < attendanceSize; i++)
             {
-                timeToAdd = attendance.getTimeAttended(0);
+                timeToAdd = attendance.getTimeAttended(i);
                 addTimeToFrequency(timeToAdd);
             }
 
@@ -67,6 +167,7 @@ public class Chart
              * 90 : 67.5=<x<75      9
              * 100: x>=75           10
              */
+
             if (timeToAdd > 75)
             {
                 yData.set(10, yData.get(10) + 1);
@@ -121,6 +222,11 @@ public class Chart
         public ArrayList<Integer> getYData()
         {
             return yData;
+        }
+
+        public Date getDate()
+        {
+            return date;
         }
     }
 }
