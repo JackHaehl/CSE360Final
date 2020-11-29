@@ -18,5 +18,16 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="ExternalLibraries" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/ExternalLibraries" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/ExternalLibraries" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

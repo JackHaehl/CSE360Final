@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -43,7 +42,7 @@ public class Repository {
         int attendanceCounter = 6;
         for(Attendance attendance: attendances){
             //columnTitles.add(attendance.date);
-            columnTitles[attendanceCounter] = attendance.date;
+            columnTitles[attendanceCounter] = attendance.date.toString();
             attendanceCounter++;
         }
         int rows = students.size();
@@ -147,7 +146,7 @@ public class Repository {
     }
 
     public void makeAttendance(Date date, File attendanceFile) throws FileNotFoundException {
-        attendances.add(new Attendance(attendanceFile,date.toString()));
+        attendances.add(new Attendance(attendanceFile,date));
     }
 
     public ArrayList<Student> getStudents(){

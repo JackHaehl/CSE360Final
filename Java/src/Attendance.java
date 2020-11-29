@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -18,7 +19,7 @@ public class Attendance
      * the date is that this attendance
      * represents
      */
-    String date;
+    Date date;
 
     /**
      * an array list which holds the
@@ -49,7 +50,7 @@ public class Attendance
      * @param date
      * @throws FileNotFoundException
      */
-    Attendance(File dateFile, String date) throws FileNotFoundException
+    public Attendance(File dateFile, Date date) throws FileNotFoundException
     {
         this.date = date;
         this.ASURiteList = new ArrayList<String>();
@@ -258,9 +259,29 @@ public class Attendance
      * @param index
      * @return timeList.get(index)
      */
-    int getTimeAttended(int index)
+    public int getTimeAttended(int index)
     {
         return timeList.get(index);
+    }
+
+    /**
+     * returns the size of the
+     * array lists
+     * @return timeList.size()
+     */
+    public int getSize()
+    {
+        return timeList.size();
+    }
+
+    /**
+     * returns the date
+     * the object is holding
+     * @return date
+     */
+    public Date getDate()
+    {
+        return date;
     }
 
 }
