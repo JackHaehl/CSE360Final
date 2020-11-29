@@ -37,6 +37,9 @@ public class Main
         repository.makeStudentList(roster);
 
         repository.makeAttendance(new Date(), new File(".\\Tests\\dateTest1.csv"));
+        Date date = new Date();
+        date.setDate(1);
+        repository.makeAttendance(date, new File(".\\Tests\\dateTest2.csv"));
 
         Chart chart = new Chart(repository);
         chart.createAndDisplayChart();
