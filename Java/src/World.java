@@ -1,8 +1,12 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -14,7 +18,8 @@ import java.io.IOException;
  * including a menu bar, a table displaying all necessary data and a menu bar displaying
  * action options to the user.
  */
-public class World {
+public class World implements Observer
+{
 
     /**
      * This is the main method, it initialized the world.
@@ -32,6 +37,11 @@ public class World {
 
         JScrollPane scrollPane;
 
+        Date date;
+
+        UserDateGetter dateGetter;
+
+        File fileToAdd;
 
 
         World(){
@@ -58,8 +68,7 @@ public class World {
             frame.add(scrollPane);
             frame.setSize(1080,720);
             frame.setVisible(true);
-
-
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         }
 
     /**
@@ -119,6 +128,11 @@ public class World {
             addAttendanceSubButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    fileToAdd = new FileFinder().getFile();
+                    Date date = new Date();
+                    dateGetter = new UserDateGetter();
+                    dateGetter.addObserver(World.this);
+                    dateGetter.openGUI();
 
                 }
             });
@@ -139,7 +153,8 @@ public class World {
             plotDataSubButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    Chart chart = new Chart(repository);
+                    chart.createAndDisplayChart();
                 }
             });
 
@@ -163,6 +178,18 @@ public class World {
             mb.add(aboutButton);
 
             return mb;
+        }
+
+        @Override
+        public void update(Observable o, Object arg)
+        {
+            date = dateGetter.getDate();
+            try {
+                repository.makeAttendance(date, fileToAdd);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+            renderJTableWithData();
         }
 
 

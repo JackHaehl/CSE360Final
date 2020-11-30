@@ -243,7 +243,7 @@ public class Repository {
                 break;
         }
 
-        dateAsString += day + ", " + year;
+        dateAsString += day + " " + year;
         return dateAsString;
     }
 

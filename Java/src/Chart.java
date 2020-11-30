@@ -147,7 +147,7 @@ public class Chart{
                 break;
         }
 
-        dateAsString += day + ", " + year;
+        dateAsString += day + " " + year;
         return dateAsString;
     }
 
