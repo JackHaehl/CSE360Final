@@ -60,7 +60,9 @@ public class Repository {
             tableData[i][4] = students.get(i).getAcademicLevel();
             tableData[i][5] = students.get(i).getASURite();
 
-            for(int j = 0; j < attendances.size();i++){
+            for(int j = 0; j < attendances.size();j++){
+                System.out.println(i);
+                System.out.println(attendances.get(j).timeList.get(i).toString());
                 tableData[i][6+j] = attendances.get(j).timeList.get(i).toString();
             }
 
