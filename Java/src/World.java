@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 
 /**
@@ -18,6 +21,7 @@ public class World {
      */
     public static void main(String[] args){
         World world = new World();
+        world.renderWorld();
     }
         JFrame frame;
 
@@ -85,6 +89,19 @@ public class World {
 
             //Initialize sub-buttons that drop down from menu buttons
             JMenuItem loadRosterSubButton = new JMenuItem("Load a Roster");
+            loadRosterSubButton.addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    try {
+                        repository.makeStudentList(new FileFinder().getFile());
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    }
+                }
+            });
+
             JMenuItem addAttendanceSubButton = new JMenuItem("Add Attendance");
             JMenuItem saveSubButton = new JMenuItem("Save");
             JMenuItem plotDataSubButton = new JMenuItem("PlotData");
