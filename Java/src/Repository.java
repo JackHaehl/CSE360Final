@@ -32,8 +32,6 @@ public class Repository {
      * @return a JTable with necessary student data, attendance data, and headers.
      */
     public JTable getJTable(){
-        //TODO: Make a 2D array for data, and a 1D Array for the names.
-        //ArrayList columnTitles = new ArrayList(Arrays.asList("ID","First Name","Last Name","Program","Level","ASURITE"));
         String[] columnTitles = new String[6+attendances.size()];
         columnTitles[0] = "ID";
         columnTitles[1] = "First Name";

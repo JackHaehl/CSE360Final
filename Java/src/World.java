@@ -80,6 +80,14 @@ public class World {
         private void renderJTableWithData(){
         JTable table = repository.getJTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+            frame.add(scrollPane);
+            frame.setSize(1080,720);
+            frame.setVisible(true);
         }
 
     /**
