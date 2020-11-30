@@ -4,14 +4,52 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Observable;
 
+/**
+ * @author Ryder Roth, Jack Haehl
+ * @version 1
+ * @since 11/27/2020
+ * This is the userDateGetter class,
+ * which is used to get a date input from users.
+ * When the user selects submit, it closes and
+ * notifies the observers.
+ */
 public class UserDateGetter extends Observable
 {
+    /**
+     * Date stored in the class
+     * updated when the user enters a date.
+     */
     Date date;
+
+    /**
+     * The names of the months are stored here
+     */
     String[] months;
+
+    /**
+     * The days in a month are stored here.
+     */
     Integer[] days;
+
+    /**
+     * The years that can be selected by the user
+     * are stored in this array.
+     */
     Integer[] years;
+
+    /**
+     * The JComboBox which holds the months array
+     */
     JComboBox<String> monthChoices;
+
+    /**
+     * The JComboBox that holds the days array
+     */
     JComboBox<Integer> dayChoices;
+
+    /**
+     * The JComboBox that holds the years array.
+     */
     JComboBox<Integer> yearChoices;
 
     public UserDateGetter()
@@ -39,6 +77,11 @@ public class UserDateGetter extends Observable
         yearChoices = new JComboBox<Integer>(years);
     }
 
+    /**
+     * opens the date selecter gui, and when the user
+     * hits the submit button it updates the current date
+     * and notifies observers.
+     */
     public void openGUI()
     {
         JFrame dateFrame = new JFrame("Enter Date");
@@ -70,6 +113,10 @@ public class UserDateGetter extends Observable
         dateFrame.pack();
     }
 
+    /**
+     * sets the date to the current selected date
+     * and notifies observers of the change
+     */
     public void setDate()
     {
         date = new Date();
@@ -85,6 +132,10 @@ public class UserDateGetter extends Observable
         notifyObservers();
     }
 
+    /**
+     * returns the date stored in the class
+     * @return date
+     */
     public Date getDate() {
         return date;
     }

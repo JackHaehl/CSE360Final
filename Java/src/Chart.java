@@ -8,9 +8,26 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author Ryder Roth, Jack Haehl
+ * @version 1
+ * @since 11/28/2020
+ * This is the chart class, which
+ * creates a chart given a repository
+ */
 public class Chart{
+
+    /**
+     * This is the dataContainer for the dataPoints
+     * given by repository
+     */
     ArrayList<DataPointContainer> dataContainer;
 
+    /**
+     * Takes in a repository and creates the dataContainer
+     * that holds the datapoints to be plotted.
+     * @param repository
+     */
     public Chart(Repository repository)
     {
         dataContainer = new ArrayList<>();
@@ -23,6 +40,9 @@ public class Chart{
         }
     }
 
+    /**
+     * Assembles the dataSet, then plots it on a new JFrame.
+     */
     public void createAndDisplayChart()
     {
         XYSeriesCollection dataset = makeDataSet();
@@ -39,6 +59,7 @@ public class Chart{
         chartFrame.setContentPane(chartPanel);
     }
 
+    // Makes the dataset using the dataContainer the class stores
     private XYSeriesCollection makeDataSet()
     {
         XYSeriesCollection dataSet = new XYSeriesCollection();
@@ -52,6 +73,8 @@ public class Chart{
         return dataSet;
     }
 
+    // Creates an XYSeries to put into the XYSeries collection
+    // used to plot the scatterplot.
     private XYSeries createXYSeries(DataPointContainer dataContainer)
     {
         Date seriesDate = dataContainer.getDate();
@@ -69,6 +92,12 @@ public class Chart{
         return xySeriesToReturn;
     }
 
+    /**
+     * Turns a date into a string that can be used to identify
+     * a dataset on the scatterplot.
+     * @param date
+     * @return
+     */
     private String dateToString(Date date)
     {
         String dateAsString = "";
@@ -122,13 +151,37 @@ public class Chart{
         return dateAsString;
     }
 
+    /**
+     * DataPointContainer stores xData and yData for an
+     * attendance in repository.
+     */
     class DataPointContainer
     {
+        /**
+         * The date that the DataPointContainer represents.
+         */
         Date date;
+
+        /**
+         * The data to be plotted on the X axis.
+         */
         ArrayList<Integer> xData;
+
+        /**
+         * The data to be plotted on the Y axis.
+         */
         ArrayList<Integer> yData;
+
+        /**
+         * The number of points for each DataPointContainer.
+         */
         final int NUM_OF_POINTS = 11;
 
+        /**
+         * takes in an attendance to create the points of a data
+         * point container.
+         * @param attendance
+         */
         public DataPointContainer(Attendance attendance)
         {
             xData = new ArrayList<Integer>();
@@ -152,6 +205,8 @@ public class Chart{
             date = attendance.getDate();
         }
 
+        // adds a 1 to the frequency that the time corresponds to
+        // (Y point represents).
         private void addTimeToFrequency(int timeToAdd)
         {
             /* %    Time Range      Index
@@ -214,16 +269,29 @@ public class Chart{
             }
         }
 
+        /**
+         * returns the arrayList holding the XData.
+         * @return xData
+         */
         public ArrayList<Integer> getXData()
         {
             return xData;
         }
 
+        /**
+         * returns the arrayList holding the YData.
+         * @return YData
+         */
         public ArrayList<Integer> getYData()
         {
             return yData;
         }
 
+        /**
+         * returns the date that the DataPointContainer
+         * represents.
+         * @return date
+         */
         public Date getDate()
         {
             return date;
