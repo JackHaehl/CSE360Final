@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 /**
@@ -76,6 +77,11 @@ public class World {
             return table;
         }
 
+        private void renderJTableWithData(){
+        JTable table = repository.getJTable();
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        }
+
     /**
      * Creates the Menu Bar for the main window of the program.
      * @return A JMenu bar with file controls and an about page.
@@ -99,14 +105,45 @@ public class World {
                     } catch (FileNotFoundException fileNotFoundException) {
                         fileNotFoundException.printStackTrace();
                     }
+                    renderJTableWithData();
                 }
             });
 
             JMenuItem addAttendanceSubButton = new JMenuItem("Add Attendance");
+            addAttendanceSubButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+
             JMenuItem saveSubButton = new JMenuItem("Save");
+            saveSubButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    try {
+                        repository.save();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+
             JMenuItem plotDataSubButton = new JMenuItem("PlotData");
+            plotDataSubButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
 
             JMenuItem aboutSubButton = new JMenuItem("About Us");
+            aboutSubButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
 
             fileButton.add(loadRosterSubButton);
             fileButton.add(addAttendanceSubButton);
@@ -121,6 +158,8 @@ public class World {
 
             return mb;
         }
+
+
 
 
 
