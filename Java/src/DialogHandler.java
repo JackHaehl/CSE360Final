@@ -4,6 +4,14 @@ import javax.swing.*;
 
 public class DialogHandler {
 
+
+    /**
+     * Creates the dialog box that appears after an attendance
+     * file has been parsed, stating the amount of extra attendees
+     * Not found in the roster and their records.
+     * @param frame the parent frame that this dialog box belongs to.
+     * @param dialog the string array that is to be displayed of students and their attendance times.
+     */
     public void createAttendanceDialog(JFrame frame, String[] dialog){
         JDialog jDialog = new JDialog(frame,"Data loaded!");
 
@@ -24,6 +32,10 @@ public class DialogHandler {
         jDialog.setVisible(true);
     }
 
+    /**
+     * Creates the dialog box that gives necessary information about the developers.
+     * @param frame the frame that this dialog box belongs to.
+     */
     public void createAboutUsDialog(JFrame frame){
         JDialog jDialog = new JDialog(frame,"About Us");
 

@@ -114,6 +114,10 @@ public class World implements Observer
             JMenuItem loadRosterSubButton = new JMenuItem("Load a Roster");
             loadRosterSubButton.addActionListener(new ActionListener()
             {
+                /**
+                 * Calls repository's methods to create the list of students based on the picked file.
+                 * @param e
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
@@ -130,6 +134,10 @@ public class World implements Observer
 
             JMenuItem addAttendanceSubButton = new JMenuItem("Add Attendance");
             addAttendanceSubButton.addActionListener(new ActionListener() {
+                /**
+                 * Opens a file picker and calls repository to parse the chosen attendance file.
+                 * @param e
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(activeRoster){
@@ -145,6 +153,10 @@ public class World implements Observer
 
             JMenuItem saveSubButton = new JMenuItem("Save");
             saveSubButton.addActionListener(new ActionListener() {
+                /**
+                 * Calls repository to save the current JTable as a csv file places in table.csv.
+                 * @param e
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e){
                     if(activeRoster){
@@ -159,6 +171,10 @@ public class World implements Observer
 
             JMenuItem plotDataSubButton = new JMenuItem("PlotData");
             plotDataSubButton.addActionListener(new ActionListener() {
+                /**
+                 * Calls the necessary methods to plot all currently visible attendance data.
+                 * @param e
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(activeRoster && activeAttendance){
