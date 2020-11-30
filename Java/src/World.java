@@ -11,13 +11,25 @@ import javax.swing.*;
  * action options to the user.
  */
 public class World {
+
+    /**
+     * This is the main method, it initialized the world.
+     * 
+     */
+    public static void main(String[] args){
+        World world = new World();
+    }
         JFrame frame;
 
         JTable table;
 
+        Repository repository;
 
 
-        World(){ }
+
+        World(){
+            repository = new Repository();
+        }
 
     /**
      * Loads the main window for the program including a table that can be scrolled through, and a menu bar.
