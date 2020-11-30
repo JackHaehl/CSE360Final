@@ -22,7 +22,7 @@ public class World implements Observer
 {
 
     /**
-     * This is the main method, it initialized the world.
+     * This is the main method, it initializes the world.
      * 
      */
     public static void main(String[] args){
@@ -42,6 +42,9 @@ public class World implements Observer
         UserDateGetter dateGetter;
 
         File fileToAdd;
+
+        boolean activeRoster = false;
+        boolean activeAttendance = false;
 
 
         World(){
@@ -121,6 +124,7 @@ public class World implements Observer
                         fileNotFoundException.printStackTrace();
                     }
                     renderJTableWithData();
+                    activeRoster = true;
                 }
             });
 
@@ -128,12 +132,14 @@ public class World implements Observer
             addAttendanceSubButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    fileToAdd = new FileFinder().getFile();
-                    Date date = new Date();
-                    dateGetter = new UserDateGetter();
-                    dateGetter.addObserver(World.this);
-                    dateGetter.openGUI();
-
+                    if(activeRoster){
+                        fileToAdd = new FileFinder().getFile();
+                        Date date = new Date();
+                        dateGetter = new UserDateGetter();
+                        dateGetter.addObserver(World.this);
+                        dateGetter.openGUI();
+                        activeAttendance = true;
+                    }
                 }
             });
 
@@ -141,10 +147,12 @@ public class World implements Observer
             saveSubButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    try {
-                        repository.save();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                    if(activeRoster){
+                        try {
+                            repository.save();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             });
@@ -153,8 +161,10 @@ public class World implements Observer
             plotDataSubButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    Chart chart = new Chart(repository);
-                    chart.createAndDisplayChart();
+                    if(activeRoster && activeAttendance){
+                        Chart chart = new Chart(repository);
+                        chart.createAndDisplayChart();
+                    }
                 }
             });
 
@@ -162,7 +172,8 @@ public class World implements Observer
             aboutSubButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    DialogHandler dialogHandler = new DialogHandler();
+                    dialogHandler.createAboutUsDialog(frame);
                 }
             });
 
@@ -186,6 +197,12 @@ public class World implements Observer
             date = dateGetter.getDate();
             try {
                 repository.makeAttendance(date, fileToAdd);
+                String[] report = repository.getAttendances().get(repository.getAttendances().size()-1).mapToSortedStudentList(repository.getStudents());
+                if(report != null){
+                    DialogHandler dialog = new DialogHandler();
+                    dialog.createAttendanceDialog(frame,report);
+                }
+
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
