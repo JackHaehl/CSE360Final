@@ -27,7 +27,10 @@ public class Repository {
 
     }
 
-
+    /**
+     * Formulates the students and attendances ArrayLists into arrays for use within JTables
+     * @return a JTable with necessary student data, attendance data, and headers.
+     */
     public JTable getJTable(){
         //TODO: Make a 2D array for data, and a 1D Array for the names.
         //ArrayList columnTitles = new ArrayList(Arrays.asList("ID","First Name","Last Name","Program","Level","ASURITE"));
@@ -42,7 +45,7 @@ public class Repository {
         int attendanceCounter = 6;
         for(Attendance attendance: attendances){
             //columnTitles.add(attendance.date);
-            columnTitles[attendanceCounter] = attendance.date.toString();
+            columnTitles[attendanceCounter] = dateToString(attendance.date);
             attendanceCounter++;
         }
         int rows = students.size();
@@ -61,8 +64,6 @@ public class Repository {
             tableData[i][5] = students.get(i).getASURite();
 
             for(int j = 0; j < attendances.size();j++){
-                System.out.println(i);
-                System.out.println(attendances.get(j).timeList.get(i).toString());
                 tableData[i][6+j] = attendances.get(j).timeList.get(i).toString();
             }
 
@@ -74,6 +75,10 @@ public class Repository {
         return new JTable(tableData,columnTitles);
     }
 
+    /**
+     * Saves the data from the current JTable into a properly formatted JTable
+     * @throws java.io.IOException
+     */
     public void save() throws java.io.IOException{
         FileWriter writer = new FileWriter("table.csv");
 
@@ -99,6 +104,11 @@ public class Repository {
     }
 
 
+    /**
+     * A quicksort implementation for the Student list.
+     * @param begin
+     * @param end
+     */
     private void sortStudentList(int begin, int end){
         if(begin < end){
             int partitionIndex = partitionForStudentSort(begin,end);
@@ -108,6 +118,12 @@ public class Repository {
         }
     }
 
+    /**
+     * A quicksort helper function for the Student list.
+     * @param begin
+     * @param end
+     * @return the index that separates the partiitons in a QuickSort.
+     */
     private int partitionForStudentSort(int begin, int end){
         String pivot = students.get(end).getASURite();
         int i = (begin-1);
@@ -130,6 +146,13 @@ public class Repository {
         return i+1;
     }
 
+    /**
+     * Creates the list of students from an input CSV file
+     * Formats the data into an ArrayList of students, with each member containing all identification information
+     * for an individual student.
+     * @param studentFile the file address for the CSV file containing the student roster data.
+     * @throws FileNotFoundException
+     */
     public void makeStudentList(File studentFile) throws FileNotFoundException{
 
         Scanner fileIn = new Scanner(studentFile);
@@ -142,11 +165,20 @@ public class Repository {
             lineData = lineIn.split(",");
             Student newStudent = new Student(Integer.parseInt(lineData[0]),lineData[1],lineData[2],lineData[3],lineData[4],lineData[5]);
             students.add(newStudent);
+            sortStudentList(0,students.size()-1);
         }
 
 
     }
 
+    /**
+     * Creates the list of attendance for every date of class from an input CSV file
+     * Formats the data into an ArrayList of attendance objects, with each member containing
+     * the ASURITE of each student and their attendance time for the pertaining day of class.
+     * @param date the date of class associated with the attendance information provided by a date picker.
+     * @param attendanceFile the file address for the CSV file containing the student attendance data.
+     * @throws FileNotFoundException
+     */
     public void makeAttendance(Date date, File attendanceFile) throws FileNotFoundException {
         attendances.add(new Attendance(attendanceFile,date));
     }
@@ -159,6 +191,63 @@ public class Repository {
         return attendances;
     }
 
+    /**
+     * Formats the date provided in the standard Java format into the desired format for a table header.
+     * @param date a Java date provided by the date picker
+     * @return a string with the necessary month information and day for use as a JTable header.
+     */
+    private String dateToString(Date date)
+    {
+        String dateAsString = "";
+        int month = date.getMonth();
+        int day = date.getDate();
+        int year = date.getYear() + 1900;
+
+        switch (month)
+        {
+            case 0:
+                dateAsString += "Jan ";
+                break;
+            case 1:
+                dateAsString += "Feb ";
+                break;
+            case 2:
+                dateAsString += "Mar ";
+                break;
+            case 3:
+                dateAsString += "Apr ";
+                break;
+            case 4:
+                dateAsString += "May ";
+                break;
+            case 5:
+                dateAsString += "Jun ";
+                break;
+            case 6:
+                dateAsString += "Jul ";
+                break;
+            case 7:
+                dateAsString += "Aug ";
+                break;
+            case 8:
+                dateAsString += "Sep ";
+                break;
+            case 9:
+                dateAsString += "Oct ";
+                break;
+            case 10:
+                dateAsString += "Nov ";
+                break;
+            case 11:
+                dateAsString += "Dec ";
+                break;
+            default:
+                break;
+        }
+
+        dateAsString += day + ", " + year;
+        return dateAsString;
+    }
 
 
 }

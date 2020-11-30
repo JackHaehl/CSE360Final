@@ -1,5 +1,15 @@
 import javax.swing.*;
 
+
+/**
+ * @author Jack Haehl, Ryder Roth
+ * @version 1
+ * @since 11/30/2020
+ * This is the world class,
+ * it handles the visual output of the main window of the program
+ * including a menu bar, a table displaying all necessary data and a menu bar displaying
+ * action options to the user.
+ */
 public class World {
         JFrame frame;
 
