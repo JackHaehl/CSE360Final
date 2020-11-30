@@ -30,6 +30,8 @@ public class World {
 
         Repository repository;
 
+        JScrollPane scrollPane;
+
 
 
         World(){
@@ -49,7 +51,7 @@ public class World {
 
             frame.setJMenuBar(menuBar);
 
-            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane = new JScrollPane(table);
             scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -81,12 +83,7 @@ public class World {
         JTable table = repository.getJTable();
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-            JScrollPane scrollPane = new JScrollPane(table);
-            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-            frame.add(scrollPane);
-            frame.setSize(1080,720);
+            scrollPane.setViewportView(table);
             frame.setVisible(true);
         }
 
@@ -108,6 +105,7 @@ public class World {
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
+                    repository = new Repository();
                     try {
                         repository.makeStudentList(new FileFinder().getFile());
                     } catch (FileNotFoundException fileNotFoundException) {
