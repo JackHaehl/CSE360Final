@@ -19,7 +19,7 @@ public class Attendance
      * the date is that this attendance
      * represents
      */
-    Date date;
+    private Date date;
 
     /**
      * an array list which holds the
@@ -29,7 +29,7 @@ public class Attendance
      * person at ASURite index 1 attended for
      * the value in timeList at index 1.
      */
-    ArrayList<String> ASURiteList;
+    private ArrayList<String> ASURiteList;
 
     /**
      * an array list which holds
@@ -39,7 +39,7 @@ public class Attendance
      * person at ASURite index 1 attended for
      * the value in timeList at index 1.
      */
-    ArrayList<Integer> timeList;
+    private ArrayList<Integer> timeList;
 
     /**
      * constructor for dates, requires a date
@@ -183,6 +183,7 @@ public class Attendance
     private int[] mapToTimeList(ArrayList<Student> sortedStudentList)
     {
         int mappedList[] = new int[ASURiteList.size()];
+
         int previousStudentMatchIndex = 0;
         String studentIndexASURite, ASURiteIndexASURite;
         int mappedListIndex = 0;
@@ -256,8 +257,28 @@ public class Attendance
     /**
      * returns the time attended by the student
      * at a given index.
-     * @param index
+     * @param ASURite
      * @return timeList.get(index)
+     */
+    public int getTimeAttended(String ASURite)
+    {
+        for (int i = 0; i < ASURiteList.size(); i++)
+        {
+            //if the element is found, return it
+            if (ASURite.equals(ASURiteList.get(i)))
+            {
+                return timeList.get(i);
+            }
+        }
+        // otherwise return 0
+        return 0;
+    }
+
+    /**
+     * returns the time attended by the student
+     * at a given index.
+     * @param index
+     * @return
      */
     public int getTimeAttended(int index)
     {
@@ -284,4 +305,19 @@ public class Attendance
         return date;
     }
 
+    /**
+     * gets time list
+     * @return timeList
+     */
+    public ArrayList<Integer> getTimeList() {
+        return timeList;
+    }
+
+    /**
+     * gets ASURiteList
+     * @return ASURiteList
+     */
+    public ArrayList<String> getASURiteList() {
+        return ASURiteList;
+    }
 }

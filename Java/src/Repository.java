@@ -56,7 +56,7 @@ public class Repository {
         int attendanceCounter = 6;
         for(Attendance attendance: attendances){
             //columnTitles.add(attendance.date);
-            columnTitles[attendanceCounter] = dateToString(attendance.date);
+            columnTitles[attendanceCounter] = dateToString(attendance.getDate());
             attendanceCounter++;
         }
         int rows = students.size();
@@ -75,7 +75,8 @@ public class Repository {
             tableData[i][5] = students.get(i).getASURite();
 
             for(int j = 0; j < attendances.size();j++){
-                tableData[i][6+j] = attendances.get(j).timeList.get(i).toString();
+                Integer integer = attendances.get(j).getTimeAttended(students.get(i).getASURite());
+                tableData[i][6+j] = integer.toString();
             }
 
         }

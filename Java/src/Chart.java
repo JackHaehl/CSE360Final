@@ -21,7 +21,7 @@ public class Chart{
      * This is the dataContainer for the dataPoints
      * given by repository
      */
-    ArrayList<DataPointContainer> dataContainer;
+    private ArrayList<DataPointContainer> dataContainer;
 
     /**
      * Takes in a repository and creates the dataContainer
@@ -160,17 +160,17 @@ public class Chart{
         /**
          * The date that the DataPointContainer represents.
          */
-        Date date;
+        private Date date;
 
         /**
          * The data to be plotted on the X axis.
          */
-        ArrayList<Integer> xData;
+        private ArrayList<Integer> xData;
 
         /**
          * The data to be plotted on the Y axis.
          */
-        ArrayList<Integer> yData;
+        private ArrayList<Integer> yData;
 
         /**
          * The number of points for each DataPointContainer.

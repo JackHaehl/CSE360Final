@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -73,8 +74,10 @@ public class RepoTest{
         repository.makeAttendance(date,dates);
         repository.getJTable();
         repository.save();
-        assertEquals("[11, 50, 10, 30]",repository.getAttendances().get(0).timeList.toString());
-        assertEquals("[dmenace, gjohnson, jhaehl, mmario]",repository.getAttendances().get(0).ASURiteList.toString());
+        ArrayList<Integer> timeList = repository.getAttendances().get(0).getTimeList();
+        ArrayList<String> ASURiteList = repository.getAttendances().get(0).getASURiteList();
+        assertEquals("[11, 50, 10, 30]",timeList.toString());
+        assertEquals("[dmenace, gjohnson, jhaehl, mmario]",ASURiteList.toString());
     }
 
 }
