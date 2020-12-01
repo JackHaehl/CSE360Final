@@ -87,7 +87,7 @@ public class World implements Observer
             frame = new JFrame();
             frame.setTitle("CSE360 Final Project");
 
-            table = createDefaultTable();
+            table = new JTable();
 
             JMenuBar menuBar = createJMenuBar();
 
