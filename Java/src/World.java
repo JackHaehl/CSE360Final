@@ -29,22 +29,51 @@ public class World implements Observer
         World world = new World();
         world.renderWorld();
     }
-        JFrame frame;
 
+    /**
+     * The frame of the swing GUI.
+     */
+    JFrame frame;
+
+    /**
+     * The table that stores student and attendance data as well as headers for the data.
+     */
         JTable table;
 
-        Repository repository;
+    /**
+     * The repository that contains necessary methods for data adding and manipulation.
+     */
+    Repository repository;
 
+    /**
+     * The pane that contains the JTable allowing for scrolling if the table is bigger than the frame.
+     */
         JScrollPane scrollPane;
 
-        Date date;
+    /**
+     * The date utilized by the observer for the date picker.
+     */
+    Date date;
 
-        UserDateGetter dateGetter;
+    /**
+     * The date picker used for adding attendance files.
+     */
+     UserDateGetter dateGetter;
 
-        File fileToAdd;
+    /**
+     * The current Attendance file to be added, passed by the date picker observable.
+     */
+    File fileToAdd;
 
+    /**
+     * Handles the cases whether or not there is currently student data in the table.
+     */
         boolean activeRoster = false;
-        boolean activeAttendance = false;
+
+    /**
+     * Handles the cases whether or not there is attendance data in the table.
+     */
+    boolean activeAttendance = false;
 
 
         World(){

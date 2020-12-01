@@ -16,11 +16,24 @@ import java.util.Scanner;
 
 public class Repository {
 
+    /**
+     * The list holding all students currently in the roster.
+     */
     private ArrayList<Student> students = new ArrayList<Student>();
 
+    /**
+     * The list holding all attendance data currently stored.
+     */
     private ArrayList<Attendance> attendances = new ArrayList<Attendance>();
 
+    /**
+     * The array of headers for columns in the table.
+     */
     private String[] jTableHeaders;
+
+    /**
+     * The array of data for the body of the table.
+     */
     private String[][] jTableData;
 
     public Repository(){
